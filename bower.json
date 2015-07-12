@@ -1,0 +1,21 @@
+{
+  "name": "mac-elec-v2",
+  "version": "0.0.0",
+  "authors": [
+    "lnimong <lnimong@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "~0.97.0",
+    "backbone": "~1.2.1",
+    "jquery": "~2.1.4",
+    "idangerous-swiper": "~3.0.8"
+  }
+}
