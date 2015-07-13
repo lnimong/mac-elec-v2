@@ -2,6 +2,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="bower_components/materialize/bin/materialize.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
 	</head>
 	<body>
   <nav>
@@ -27,9 +28,7 @@
 	
   
   
-  <div id="main">
-    
-  </div>	
+  <div id="main" ></div>	
   
    <footer class="page-footer" style="background:transparent; ">
 
@@ -45,7 +44,6 @@
 		<script type="text/javascript" src="bower_components/materialize/bin/materialize.js"></script>
 		<script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
 		<script type="text/javascript" src="bower_components/backbone/backbone-min.js"></script>
-  
     
     <script type="text/javascript">
       $(function () {
@@ -54,14 +52,27 @@
         
         
         var options =[
-          {path : "accueil", view : "accueil"}
+          {path : 'accueil', view : 'accueil', root : true},
+          {path : 'presentation', view : 'presentation'},
+          {path : 'services', view : 'services'},
+          {path : 'domotique', view : 'domotique'},
+          {path : 'contact', view : 'contact'}
         ];
         
-        
+        var open = function (viewname) {
+          $('#main').addClass('empty');
+            $.get('pages/'+viewname+'.html', function (data) {
+              $('#main').html(data);
+              $('#main').removeClass('empty');
+            });
+        };
         
         var routes = {}
         options.forEach(function (item) {
           routes[item.path] = item.view;
+          if(item.root){
+            routes[''] = item.view;
+          }
         });
         routes["*actions"] = "defaultRoute";
         var AppRouter = Backbone.Router.extend({
@@ -70,11 +81,11 @@
         var router = new AppRouter;
         options.forEach(function (item) {
           router.on('route:' + item.view, function () {
-            alert(item.path +"/"+item.view);   
+            open(item.view);
           });
         });
         router.on('route:defaultRoute', function (actions) {
-            alert( actions ); 
+            open('not-found'); 
         });
         Backbone.history.start();
         
