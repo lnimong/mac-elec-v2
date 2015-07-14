@@ -3,6 +3,8 @@
 		<link rel="stylesheet" type="text/css" href="bower_components/materialize/bin/materialize.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
+		<link rel="stylesheet" type="text/css" href="style.css" />
+    
 	</head>
 	<body>
   <nav>
@@ -45,8 +47,54 @@
 		<script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
 		<script type="text/javascript" src="bower_components/backbone/backbone-min.js"></script>
     
+    
+    <script type="text/template" lang="html" id="loader">
+     <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-red">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-yellow">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-green">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+    </script>
+    
     <script type="text/javascript">
       $(function () {
+        $('#main').html($('#loader').html());
         
         $('.button-collapse').sideNav();
         
@@ -61,10 +109,25 @@
         
         var open = function (viewname) {
           $('#main').addClass('empty');
-            $.get('pages/'+viewname+'.html', function (data) {
+          var forcedisplay = false;
+          var newdata = ''; 
+          
+          $.get('pages/'+viewname+'.html', function (data) {
+            newdata = data;
+            if(forcedisplay) {
               $('#main').html(data);
-              $('#main').removeClass('empty');
-            });
+            }
+          });
+            
+          setTimeout(function(){ 
+            if(newdata === '') {
+              forcedisplay = true;
+              $('#main').html($('#loader').html());
+            }
+            else $('#main').html(newdata);
+            $('#main').removeClass('empty');
+          }, 300);
+          
         };
         
         var routes = {}
