@@ -7,5 +7,9 @@
 #main.empty {
   margin-left: -2em;
   opacity: 0;
-  
+}
+
+.banner {
+  height: 400px;
+  background: lightblue
 }

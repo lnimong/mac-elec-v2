@@ -3,30 +3,31 @@
 		<link rel="stylesheet" type="text/css" href="bower_components/materialize/bin/materialize.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="less.css" />
     
 	</head>
 	<body>
+    
+  <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
       <a class="brand-logo">Logo</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#/accueil">Accueil</a></li>
-        <li><a href="#/presentation">Pr&eacute;sentation</a></li>
         <li><a href="#/services">Services</a></li>
         <li><a href="#/domotique">Domotique</a></li>
         <li><a href="#/contact">Contact</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="#/accueil">Accueil</a></li>
-        <li><a href="#/presentation">Pr&eacute;sentation</a></li>
         <li><a href="#/services">Services</a></li>
         <li><a href="#/domotique">Domotique</a></li>
         <li><a href="#/contact">Contact</a></li>
       </ul>
     </div>
   </nav>
+  </div>
 	
   
   
@@ -124,7 +125,10 @@
               forcedisplay = true;
               $('#main').html($('#loader').html());
             }
-            else $('#main').html(newdata);
+            else {
+              $('#main').html(newdata);
+              $('body').scrollTop(0);
+            }
             $('#main').removeClass('empty');
           }, 300);
           
