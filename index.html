@@ -2,6 +2,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="bower_components/materialize/bin/materialize.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--<link href="internet/icons.css" rel="stylesheet">-->
     
 		<link rel="stylesheet" type="text/css" href="less.css" />
     
@@ -14,16 +15,16 @@
       <a class="brand-logo">Logo</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#/accueil">Accueil</a></li>
-        <li><a href="#/services">Services</a></li>
-        <li><a href="#/domotique">Domotique</a></li>
-        <li><a href="#/contact">Contact</a></li>
+        <li id="accueilLnk"><a href="#/accueil">Accueil</a></li>
+        <li id="servicesLnk"><a href="#/services">Services</a></li>
+        <li id="domotiqueLnk"><a href="#/domotique">Domotique</a></li>
+        <li id="contactLnk"><a href="#/contact">Contact</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="#/accueil">Accueil</a></li>
-        <li><a href="#/services">Services</a></li>
-        <li><a href="#/domotique">Domotique</a></li>
-        <li><a href="#/contact">Contact</a></li>
+        <li id="accueilLnk"><a href="#/accueil">Accueil</a></li>
+        <li id="servicesLnk"><a href="#/services">Services</a></li>
+        <li id="domotiqueLnk"><a href="#/domotique">Domotique</a></li>
+        <li id="contactLnk"><a href="#/contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -50,6 +51,7 @@
     
     
     <script type="text/template" lang="html" id="loader">
+    <div class="loading">
      <div class="preloader-wrapper big active">
       <div class="spinner-layer spinner-blue">
         <div class="circle-clipper left">
@@ -91,6 +93,7 @@
         </div>
       </div>
     </div>
+    </div>
     </script>
     
     <script type="text/javascript">
@@ -109,7 +112,10 @@
         ];
         
         var open = function (viewname) {
-          $('#main').addClass('empty');
+          $('body').addClass('empty');
+          $('.navbar-fixed li').removeClass('active');
+          $('#'+viewname+'Lnk').addClass('active');
+          $('footer').hide();
           var forcedisplay = false;
           var newdata = ''; 
           
@@ -117,6 +123,7 @@
             newdata = data;
             if(forcedisplay) {
               $('#main').html(data);
+              $('footer').show();
             }
           });
             
@@ -128,8 +135,9 @@
             else {
               $('#main').html(newdata);
               $('body').scrollTop(0);
+              $('footer').show();
             }
-            $('#main').removeClass('empty');
+            $('body').removeClass('empty');
           }, 300);
           
         };
